@@ -1,19 +1,13 @@
-import { useState } from 'react';
-import { useInput } from './hooks/useInput';
+import { useToggle } from './hooks/useToggle';
 
 function App() {
-	const nameInput = useInput('');
-	const emailInput = useInput('');
-	const [email, setEmail] = useState('');
+	const [isVisible, toggleVisible] = useToggle();
 
-	const handelSubmit = event => {
-		event.preventDefault();
-		console.log('Name: ' + nameInput.value);
-		console.log('Email: ' + emailInput.value);
-	};
 	return (
 		<div className='main'>
 			<h1 className='title'>Custom Hooks</h1>
+			<button onClick={toggleVisible}>{isVisible ? 'Hide' : 'Show'} Content</button>
+			{isVisible && <div>This is some content</div>}
 		</div>
 	);
 }
