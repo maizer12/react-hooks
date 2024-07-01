@@ -1,13 +1,18 @@
-import { useToggle } from './hooks/useToggle';
+import { useEffect, useState } from 'react';
+import { useDebounce } from './hooks/useDebounce';
 
 function App() {
-	const [isVisible, toggleVisible] = useToggle();
+	const [search, setSearch] = useState('');
+	const debouncedSearch = useDebounce(search, 500);
+
+	useEffect(() => {
+		console.log(debouncedSearch);
+	}, [debouncedSearch]);
 
 	return (
 		<div className='main'>
 			<h1 className='title'>Custom Hooks</h1>
-			<button onClick={toggleVisible}>{isVisible ? 'Hide' : 'Show'} Content</button>
-			{isVisible && <div>This is some content</div>}
+			<input type='text' value={search} onChange={e => setSearch(e.target.value)} placeholder='Search...' />
 		</div>
 	);
 }
