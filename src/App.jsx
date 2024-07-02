@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react';
-import { useDebounce } from './hooks/useDebounce';
+import { useState } from 'react';
+import { useInterval } from './hooks/useInteravl';
 
 function App() {
-	const [search, setSearch] = useState('');
-	const debouncedSearch = useDebounce(search, 500);
+	const [count, setCount] = useState(0);
 
-	useEffect(() => {
-		console.log(debouncedSearch);
-	}, [debouncedSearch]);
+	useInterval(() => {
+		setCount(count + 1);
+	}, 1000);
 
 	return (
 		<div className='main'>
 			<h1 className='title'>Custom Hooks</h1>
-			<input type='text' value={search} onChange={e => setSearch(e.target.value)} placeholder='Search...' />
+			<h4>Count: {count}</h4>
 		</div>
 	);
 }
