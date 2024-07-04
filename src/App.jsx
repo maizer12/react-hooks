@@ -1,17 +1,12 @@
-import { useState } from 'react';
-import { useInterval } from './hooks/useInteravl';
+import { useHover } from './hooks/useHover';
 
 function App() {
-	const [count, setCount] = useState(0);
-
-	useInterval(() => {
-		setCount(count + 1);
-	}, 1000);
+	const [hoverRef, isHovered] = useHover();
 
 	return (
 		<div className='main'>
 			<h1 className='title'>Custom Hooks</h1>
-			<h4>Count: {count}</h4>
+			<div ref={hoverRef}>{isHovered ? 'Hover is true!' : 'Hover is false!'}</div>
 		</div>
 	);
 }
