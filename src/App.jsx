@@ -1,23 +1,13 @@
-import { useState, useRef } from 'react';
-import { useClickOutside } from './hooks/useClickOutside';
+import { useMediaQuery } from './hooks/useMediaQuery';
 
 function App() {
-	const [isOpen, setIsOpen] = useState(false);
-	const ref = useRef();
-
-	useClickOutside(ref, () => setIsOpen(false));
+	const isLargeScreen = useMediaQuery('(min-width: 1024px)');
 
 	return (
 		<div className='main'>
 			<h1 className='title'>Custom Hooks</h1>
-			<div>
-				<button onClick={() => setIsOpen(!isOpen)}>{isOpen ? 'Close' : 'Open'} Dropdown</button>
-				{isOpen && (
-					<div ref={ref} style={{ border: '1px solid black', padding: '10px', marginTop: '10px' }}>
-						<p>This is a Dropdown menu. Click outside to close it!</p>
-					</div>
-				)}
-			</div>
+			<h4>{isLargeScreen ? 'Large Screen' : 'Small Screen'}</h4>
+			<p>The screen size is {isLargeScreen ? 'large' : 'small'} than 1024 pixels.</p>
 		</div>
 	);
 }
