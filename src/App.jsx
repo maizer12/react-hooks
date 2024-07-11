@@ -1,13 +1,14 @@
-import { useMediaQuery } from './hooks/useMediaQuery';
+import { useMousePosition } from './hooks/useMousePosition';
 
 function App() {
-	const isLargeScreen = useMediaQuery('(min-width: 1024px)');
+	const { y, x } = useMousePosition();
 
 	return (
 		<div className='main'>
 			<h1 className='title'>Custom Hooks</h1>
-			<h4>{isLargeScreen ? 'Large Screen' : 'Small Screen'}</h4>
-			<p>The screen size is {isLargeScreen ? 'large' : 'small'} than 1024 pixels.</p>
+			<h2>Mouse Position</h2>
+			<p>X: {x}</p>
+			<p>Y: {y}</p>
 		</div>
 	);
 }
