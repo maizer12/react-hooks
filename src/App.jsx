@@ -1,14 +1,13 @@
-import { useMousePosition } from './hooks/useMousePosition';
+import { useDarkMode } from './hooks/useDarkMode';
 
 function App() {
-	const { y, x } = useMousePosition();
+	const [dark, setDark] = useDarkMode();
 
 	return (
 		<div className='main'>
 			<h1 className='title'>Custom Hooks</h1>
-			<h2>Mouse Position</h2>
-			<p>X: {x}</p>
-			<p>Y: {y}</p>
+			<h2>{dark ? 'Dark Mode' : 'Light Mode'}</h2>
+			<button onClick={() => setDark(prev => !prev)}>Toggle Mode</button>
 		</div>
 	);
 }
