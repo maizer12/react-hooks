@@ -1,12 +1,16 @@
-import { useNetworkStatus } from './hooks/useNetworkStatus';
+import { useState } from 'react';
+import { useClipboard } from './hooks/useClipboard';
 
 function App() {
-	const isOnline = useNetworkStatus();
+	const [text, setText] = useState('Hello, World!');
+	const { isCopied, copyToClipboard } = useClipboard();
 
 	return (
 		<div className='main'>
 			<h1 className='title'>Custom Hooks</h1>
-			<p>{isOnline ? 'Online' : 'Offline'}</p>
+			<textarea value={text} onChange={e => setText(e.target.value)} />
+			<button onClick={() => copyToClipboard(text)}>Copy Text</button>
+			{isCopied && <p>Copied!</p>}
 		</div>
 	);
 }
