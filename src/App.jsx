@@ -1,13 +1,19 @@
-import { useWindowScroll } from './hooks/useWindowScroll';
+import { useIntersectionObserver } from './hooks/useIntersectionObserver';
 
 function App() {
-	const { x, y } = useWindowScroll();
+	const [ref, isIntersecting] = useIntersectionObserver({
+		root: null,
+		rootMargin: '0px',
+		threshold: 0.1,
+	});
 
 	return (
-		<div className='main' style={{ height: 2000, width: 7000 }}>
+		<div className='main' style={{ height: 2000 }}>
 			<h1 className='title'>Custom Hooks</h1>
-			<p>X: {x}px</p>
-			<p>Y: {y}px</p>
+			<div ref={ref} style={{ height: '100px', backgroundColor: isIntersecting ? 'green' : 'red' }}>
+				{isIntersecting ? 'Visible' : 'Not'}
+			</div>
+			<p style={{ position: 'fixed', top: 40, left: 40, width: 100, height: '100px', backgroundColor: isIntersecting ? 'green' : 'red' }}>{isIntersecting ? 'Visible' : 'Not'}</p>
 		</div>
 	);
 }
